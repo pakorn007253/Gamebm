@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1566208801,
+	"version": 1566312234,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -24,6 +24,8 @@
 		"images/enemy3-sheet1.png",
 		"images/enemy4-sheet0.png",
 		"images/enemy5-sheet0.png",
+		"images/btnham-sheet0.png",
+		"images/buy-sheet0.png",
 		"images/background.png",
 		"images/block-sheet0.png",
 		"images/eblock-sheet0.png",
@@ -52,7 +54,6 @@
 		"images/btnselect-sheet0.png",
 		"images/btnselect-sheet1.png",
 		"images/levelfont.png",
-		"images/btnham-sheet0.png",
 		"images/showselectlevel-sheet0.png",
 		"images/connectgame-sheet0.png",
 		"images/money-sheet0.png",
@@ -60,6 +61,7 @@
 		"images/status-sheet0.png",
 		"images/bgselectskin-sheet0.png",
 		"images/confirm-sheet0.png",
+		"images/shop-sheet0.png",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",

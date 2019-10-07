@@ -1,6 +1,6 @@
 ﻿{
-	"name": "Game-DeadMaze",
-	"short_name": "Game-DeadMaze",
+	"name": "Deadly Maze",
+	"short_name": "Deadly Maze",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "any",

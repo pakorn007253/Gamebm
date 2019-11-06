@@ -25932,86 +25932,6 @@ cr.behaviors.Pin = function(runtime)
 }());
 ;
 ;
-cr.behaviors.Rotate = function(runtime)
-{
-	this.runtime = runtime;
-};
-(function ()
-{
-	var behaviorProto = cr.behaviors.Rotate.prototype;
-	behaviorProto.Type = function(behavior, objtype)
-	{
-		this.behavior = behavior;
-		this.objtype = objtype;
-		this.runtime = behavior.runtime;
-	};
-	var behtypeProto = behaviorProto.Type.prototype;
-	behtypeProto.onCreate = function()
-	{
-	};
-	behaviorProto.Instance = function(type, inst)
-	{
-		this.type = type;
-		this.behavior = type.behavior;
-		this.inst = inst;				// associated object instance to modify
-		this.runtime = type.runtime;
-	};
-	var behinstProto = behaviorProto.Instance.prototype;
-	behinstProto.onCreate = function()
-	{
-		this.speed = cr.to_radians(this.properties[0]);
-		this.acc = cr.to_radians(this.properties[1]);
-	};
-	behinstProto.saveToJSON = function ()
-	{
-		return {
-			"speed": this.speed,
-			"acc": this.acc
-		};
-	};
-	behinstProto.loadFromJSON = function (o)
-	{
-		this.speed = o["speed"];
-		this.acc = o["acc"];
-	};
-	behinstProto.tick = function ()
-	{
-		var dt = this.runtime.getDt(this.inst);
-		if (dt === 0)
-			return;
-		if (this.acc !== 0)
-			this.speed += this.acc * dt;
-		if (this.speed !== 0)
-		{
-			this.inst.angle = cr.clamp_angle(this.inst.angle + this.speed * dt);
-			this.inst.set_bbox_changed();
-		}
-	};
-	function Cnds() {};
-	behaviorProto.cnds = new Cnds();
-	function Acts() {};
-	Acts.prototype.SetSpeed = function (s)
-	{
-		this.speed = cr.to_radians(s);
-	};
-	Acts.prototype.SetAcceleration = function (a)
-	{
-		this.acc = cr.to_radians(a);
-	};
-	behaviorProto.acts = new Acts();
-	function Exps() {};
-	Exps.prototype.Speed = function (ret)
-	{
-		ret.set_float(cr.to_degrees(this.speed));
-	};
-	Exps.prototype.Acceleration = function (ret)
-	{
-		ret.set_float(cr.to_degrees(this.acc));
-	};
-	behaviorProto.exps = new Exps();
-}());
-;
-;
 cr.behaviors.custom = function(runtime)
 {
 	this.runtime = runtime;
@@ -26382,15 +26302,15 @@ cr.behaviors.solid = function(runtime)
 cr.getObjectRefTable = function () { return [
 	cr.plugins_.Audio,
 	cr.plugins_.Browser,
-	cr.plugins_.LocalStorage,
-	cr.plugins_.Keyboard,
 	cr.plugins_.Mouse,
+	cr.plugins_.Keyboard,
+	cr.plugins_.LocalStorage,
 	cr.plugins_.Function,
 	cr.plugins_.Sprite,
-	cr.plugins_.Text,
-	cr.plugins_.TiledBg,
 	cr.plugins_.Touch,
+	cr.plugins_.Text,
 	cr.plugins_.SpriteFontPlus,
+	cr.plugins_.TiledBg,
 	cr.behaviors.custom,
 	cr.behaviors.Flash,
 	cr.behaviors.EightDir,
@@ -26398,7 +26318,6 @@ cr.getObjectRefTable = function () { return [
 	cr.behaviors.solid,
 	cr.behaviors.Pin,
 	cr.behaviors.Fade,
-	cr.behaviors.Rotate,
 	cr.system_object.prototype.cnds.EveryTick,
 	cr.plugins_.Sprite.prototype.acts.AddInstanceVar,
 	cr.system_object.prototype.exps.dt,
@@ -26488,6 +26407,8 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.exps.zeropad,
 	cr.plugins_.SpriteFontPlus.prototype.cnds.CompareInstanceVar,
 	cr.plugins_.SpriteFontPlus.prototype.acts.SetText,
+	cr.plugins_.LocalStorage.prototype.acts.ClearStorage,
+	cr.system_object.prototype.acts.ResetGlobals,
 	cr.plugins_.Browser.prototype.acts.Close,
 	cr.plugins_.Text.prototype.acts.SetPos,
 	cr.plugins_.Touch.prototype.cnds.OnTapGestureObject,
@@ -26495,7 +26416,6 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.exps.layoutname,
 	cr.plugins_.Sprite.prototype.acts.Spawn,
 	cr.system_object.prototype.exps.str,
-	cr.system_object.prototype.acts.SetLayerVisible,
 	cr.plugins_.SpriteFontPlus.prototype.acts.Destroy,
 	cr.plugins_.Audio.prototype.cnds.IsTagPlaying,
 	cr.plugins_.Audio.prototype.acts.SetMuted
